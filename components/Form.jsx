@@ -25,10 +25,12 @@ function Form() {
   const schema = z.object({
     storeName: z
       .string()
+      .toLowerCase()
       .min(3, "Store name must be at least 3 characters long"),
     subDomain: z
       .string()
       .min(1, "Sub domain name is required")
+      .toLowerCase()
       .refine(async (value) => {
         const response = await fetch(
           `https://interview-task-green.vercel.app/task/domains/check/${value}.expressitbd.com`
@@ -88,12 +90,11 @@ function Form() {
       console.log(result);
       setIsLoading(false);
 
-      Toast.fire({
-        icon: "success",
-        title: "Store succesfully created",
-      });
-
       if (result.status === 200) {
+        Toast.fire({
+          icon: "success",
+          title: "Store succesfully created",
+        });
         router.push(`/products`);
       }
     } catch (error) {
@@ -125,7 +126,7 @@ function Form() {
             {...register("storeName")}
             className={`${
               errors?.storeName ? "border-red-500" : "border-[#DDDDDD]"
-            } w-full px-[15px] py-[8px] border  bg-white rounded-[8px] outline-none`}
+            } w-full px-[15px] py-[8px] border  bg-white rounded-[8px] outline-none text-black`}
           ></input>
           {errors?.storeName && (
             <p className="text-red-500 text-[13px] font-semibold">
@@ -145,7 +146,7 @@ function Form() {
               {...register("subDomain")}
               className={`${
                 errors.subDomain ? "border-red-500" : "border-[#DDDDDD]"
-              } w-full px-[15px] py-[8px] border  bg-white rounded-[8px] outline-none`}
+              } w-full px-[15px] py-[8px] border  bg-white rounded-[8px] outline-none text-black`}
             ></input>
             <p className="absolute z-30 top-[25%] right-[15px] text-[#333333]">
               .expressitbd.com
@@ -164,7 +165,7 @@ function Form() {
           </p>
           <select
             {...register("storeLocation")}
-            className="w-full px-[15px] py-[8px] border border-[#DDDDDD] bg-white rounded-[8px] outline-none"
+            className="w-full px-[15px] py-[8px] border border-[#DDDDDD] bg-white rounded-[8px] outline-none text-black"
           >
             <option value="Bangladesh">Bangladesh</option>
             <option value="Pakistan">Pakistan</option>
@@ -179,7 +180,7 @@ function Form() {
           </p>
           <select
             {...register("storeCategory")}
-            className="w-full px-[15px] py-[8px] border border-[#DDDDDD] bg-white rounded-[8px] outline-none"
+            className="w-full px-[15px] py-[8px] border border-[#DDDDDD] bg-white rounded-[8px] outline-none text-black"
           >
             <option value="fashion">Fashion</option>
             <option value="ecommerce">E-Commerce</option>
@@ -194,7 +195,7 @@ function Form() {
           </p>
           <select
             {...register("storeCurrency")}
-            className="w-full px-[15px] py-[8px] border border-[#DDDDDD] bg-white rounded-[8px] outline-none"
+            className="w-full px-[15px] py-[8px] border border-[#DDDDDD] bg-white rounded-[8px] outline-none text-black"
           >
             <option value="BDT">BDT (Taka)</option>
             <option value="USD">US Dollar</option>
@@ -213,7 +214,7 @@ function Form() {
             {...register("storeEmail")}
             className={`${
               errors.storeEmail ? "border-red-500" : "border-[#DDDDDD]"
-            } w-full px-[15px] py-[8px] border  bg-white rounded-[8px] outline-none`}
+            } w-full px-[15px] py-[8px] border  bg-white rounded-[8px] outline-none text-black`}
           ></input>
           {errors?.storeEmail && (
             <p className="text-red-500 text-[13px] font-semibold">
